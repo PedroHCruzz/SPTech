@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="visual.css" media="screen" />
+    <title>Pedro Cruz</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        video#videoBackground {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; 
+        }
+
+        .principal {
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        h1, h2, b {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <video id="videoBackground" autoplay loop muted playsinline>
+        <source src="fundo.mp4.mp4" type="video/mp4">
+        Seu navegador não suporta o elemento de vídeo.
+    </video>
+    
+    <header class="cabecalho">
+        <h1>Pedro Super Machine 2</h1>
+    </header>
+
+    <main class="principal">
+        <h1>Digite um valor</h1>
+        <input type="text" id="input_valor" placeholder="Insira número ou letra"><br><br>
+
+        <input type="radio" name="valorNumerico" id="inputRadio_decimal" class="btnRadio" value="Decimal" checked><b>Decimal</b>
+        <input type="radio" name="valorNumerico" id="inputRadio_binario" class="btnRadio" value="Binario"><b>Binario</b>
+        <input type="radio" name="valorNumerico" id="inputRadio_hexadecimal" class="btnRadio" value="Hexadecimal"><b>Hexadecimal</b>
+        <input type="radio" name="valorNumerico" id="inputRadio_octal" class="btnRadio" value="Octal"><b>Octal</b>
+
+        <br><br>
+
+        <div id="div_mensagem" class="mensagem"></div>
+    </main>
+
+    <script>
+        document.getElementById('input_valor').addEventListener('input', verificaBase);
+
+        function verificaBase() {
+            let valorInserido = input_valor.value; 
+            let mensagem = div_mensagem;
+            let baseDecimal = inputRadio_decimal.checked;
+            let baseBinario = inputRadio_binario.checked;
+            let baseHexadecimal = inputRadio_hexadecimal.checked;
+            let baseOctal = inputRadio_octal.checked;
+
+            if (!valorInserido) {
+                mensagem.innerHTML = ''; 
+                return;
+            }
+
+            if (baseDecimal == true) {
+                let valorDecimal = Number(valorInserido);
+                if (isNaN(valorDecimal)) {
+                    mensagem.innerHTML = `<b>Entrada inválida para decimal!</b>`;
+                    return;
+                }
+                let octal = valorDecimal.toString(8);
+                let hexadecimal = valorDecimal.toString(16).toUpperCase();
+                let binaria = valorDecimal.toString(2);
+
+                mensagem.innerHTML = `
+                    Decimal para Octal: <b>${octal}</b><br>
+                    Decimal para hexadecimal: <b>${hexadecimal}</b><br> 
+                    Decimal para binário: <b>${binaria}</b>
+                `;
+            }
+
+            if (baseBinario == true) {
+                let binarioToDecimal = parseInt(valorInserido, 2);
+                if (isNaN(binarioToDecimal)) {
+                    mensagem.innerHTML = `<b>Entrada inválida para binário!</b>`;
+                    return;
+                }
+                let binarioToOctal = binarioToDecimal.toString(8);
+                let binarioToHexadecimal = binarioToDecimal.toString(16).toUpperCase();
+
+                mensagem.innerHTML = `
+                    Binário para decimal: <b>${binarioToDecimal}</b><br>
+                    Binário para octal: <b>${binarioToOctal}</b><br> 
+                    Binário para hexadecimal: <b>${binarioToHexadecimal}</b>
+                `;
+            }
+
+            if (baseHexadecimal == true) {
+                let valorHexadecimal = parseInt(valorInserido, 16);
+                if (isNaN(valorHexadecimal)) {
+                    mensagem.innerHTML = `<b>Entrada inválida para hexadecimal!</b>`;
+                    return;
+                }
+                let hexaToOctal = valorHexadecimal.toString(8);
+                let hexaToBinario = valorHexadecimal.toString(2);
+
+                mensagem.innerHTML = `
+                    Hexadecimal para decimal: <b>${valorHexadecimal}</b><br>
+                    Hexadecimal para octal: <b>${hexaToOctal}</b><br>
+                    Hexadecimal para binário: <b>${hexaToBinario}</b>
+                `;
+            }
+
+            if (baseOctal == true) {
+                let valorOctal = parseInt(valorInserido, 8);
+                if (isNaN(valorOctal)) {
+                    mensagem.innerHTML = `<b>Entrada inválida para octal!</b>`;
+                    return;
+                }
+                let OctalToBinario = valorOctal.toString(2);
+                let OctalToHexadecimal = valorOctal.toString(16).toUpperCase();
+
+                mensagem.innerHTML = `
+                    Octal para decimal: <b>${valorOctal}</b><br>
+                    Octal para binário: <b>${OctalToBinario}</b><br>            
+                    Octal para hexadecimal: <b>${OctalToHexadecimal}</b><br>
+                `;
+            }
+        }
+
+    </script>
+
+</body>
+</html>

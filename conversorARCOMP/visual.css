@@ -1,0 +1,104 @@
+body {
+    background: linear-gradient(180deg, #1a1e29, #132d46, #01c383) no-repeat;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cabecalho {
+    
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: rgb(246, 250, 215) ;
+    opacity: 0;
+    transform: scale(0);
+    animation: crescerTexto 2s ease-in-out forwards;
+}
+
+@keyframes crescerTexto {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.principal {
+    flex-direction: column;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+    color: antiquewhite ;
+}
+
+.btnRadio {
+    border-radius: 10px;
+}
+.btn {
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 20px;
+    background-color: #01c383;
+    color: antiquewhite;
+    width: 25%;
+    padding: 20px;
+    cursor: pointer;
+
+}
+
+.btn:hover{
+    background-color: #132d46;
+    transition: 0.5s;
+}
+.btn {
+    border: none;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 20px;
+    background-color: #01c383;
+    color: antiquewhite;
+    width: 35%; 
+    padding: 25px; 
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.btn:hover {
+    background-color: #007BFF; 
+}
+
+
+#input_valor {
+    justify-items: center;
+    padding: 10px;
+    width: 20%;
+    
+}
+
+input::placeholder {
+    color: #d3d3d3;
+    text-align: center;
+    transition: opacity 0.3s ease;
+}
+
+input:focus::placeholder {
+    opacity: 0;
+  }
+
+.mensagem{
+    font-size: 22px;
+}
